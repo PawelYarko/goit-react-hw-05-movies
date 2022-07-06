@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
 import s from './css/Movies.module.css'
-
 
 export default function Movies() {
   const [filmsNames, setFilmsNames] = useState([]);
@@ -42,11 +42,21 @@ export default function Movies() {
           autoFocus
           placeholder="Search films"
         />
-        <button type="submit" className={s.button}>Search</button>
+        <button type="submit" className={s.button}>
+          Search
+        </button>
       </form>
-<ul>
-{searchRequest && searchRequest.map(item =><li key={item.id}>{item.original_title ?? item.title}</li>)}
-</ul>
+      <ul>
+        {searchRequest &&
+          searchRequest.map(item => (
+            <li key={item.id}>
+              <NavLink to={`movies/${item.id}`}>
+                {item.original_title ?? item.title}
+              </NavLink>
+              
+              </li>
+          ))}
+      </ul>
     </>
   );
 }

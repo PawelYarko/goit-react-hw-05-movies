@@ -25,10 +25,10 @@ export default function Home() {
       <ul className={s.filmsList}>
         {popFilms &&
           popFilms.map(film => (
-            <li className={s.item}>
-              <NavLink to={`movies/${film.id}`} className={s.popFilm} key={film.id}>
+            <li className={s.item} key={film.id}>
+              <NavLink to={`movies/${film.id}`} className={s.popFilm} >
                 <img className={s.img} src={`https://image.tmdb.org/t/p/w500${film.backdrop_path}`}/>
-                <p>{film.original_title ?? film.original_name ?? film.title}</p>
+                <p>{film.original_title ?? film.title ?? film.original_name}</p>
               </NavLink>
             </li>
           ))}

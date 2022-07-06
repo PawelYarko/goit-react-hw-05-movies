@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useParams, NavLink } from 'react-router-dom';
+import { useParams, NavLink, Outlet } from 'react-router-dom';
 import s from './MovieDetails.module.css';
 
-export default function MovieDetails() {
+const MovieDetails = () =>{
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
 
+  
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/movie/${movieId}?api_key=38f8f0caa293ab4deac25df0604d8478&language=en-US`
@@ -50,9 +51,12 @@ export default function MovieDetails() {
                 </NavLink>
               </li>
             </ul>
+            <Outlet />
           </div>
         </>
       )}
     </>
   );
 }
+
+export {MovieDetails};
