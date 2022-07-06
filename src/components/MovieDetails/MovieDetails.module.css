@@ -1,0 +1,44 @@
+.container{
+    display: flex;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.img{
+    border-radius: 10%;
+}
+
+.descr{
+    margin-left: 20px;
+}
+
+.additional{
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.title{
+    margin-bottom: 0px;
+}
+.list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.item{
+    padding: 15px;
+}
+
+.nav{
+    color: black;
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 24px;
+    text-decoration:none;
+}
+
+.nav:hover{
+    color: rgb(177, 31, 87);
+    font-size: 24px;
+    line-height: 24px;
+}

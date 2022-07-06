@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
+import s from './css/Movies.module.css'
+
 
 export default function Movies() {
-  const [filmsNames, setFilmsNames] = useState(null);
+  const [filmsNames, setFilmsNames] = useState([]);
   const [inputValue, setInputValue] = useState(null);
   const [searchRequest, setSearchRequest] = useState(null);
 
   useEffect(() => {
     fetch(
-    //   'https://api.themoviedb.org/3/trending/all/day?api_key=38f8f0caa293ab4deac25df0604d8478'
       `https://api.themoviedb.org/3/search/movie?api_key=38f8f0caa293ab4deac25df0604d8478&language=en-US&page=1&include_adult=false&query=${filmsNames}`
     )
       .then(response => {
@@ -37,13 +38,15 @@ export default function Movies() {
           onChange={handleInputFormChange}
           type="text"
           autoComplete="off"
+          className={s.input}
           autoFocus
           placeholder="Search films"
         />
-        <button type="submit">Search</button>
+        <button type="submit" className={s.button}>Search</button>
       </form>
-
-  {searchRequest && searchRequest.map(item =><li key={item.id}>{item.original_title ?? item.title}</li>)}
+<ul>
+{searchRequest && searchRequest.map(item =><li key={item.id}>{item.original_title ?? item.title}</li>)}
+</ul>
     </>
   );
 }
