@@ -5,9 +5,6 @@ import s from './css/Home.module.css'
 export default function Home() {
   const [popFilms, setPopFilms] = useState(null);
 
-  // const match = useMatch();
-  // console.log(match)
-
   useEffect(() => {
     fetch(
       'https://api.themoviedb.org/3/trending/all/day?api_key=38f8f0caa293ab4deac25df0604d8478'
@@ -17,9 +14,7 @@ export default function Home() {
       })
       .then(data => setPopFilms(data.results));
   }, []);
-  {
-    /* <HomeCollectionItem film={film}/> {`${url}/${film.id}`}*/
-  }
+  
   return (
     <>
       <ul className={s.filmsList}>

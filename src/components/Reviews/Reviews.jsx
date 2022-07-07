@@ -16,7 +16,7 @@ export default function Reviews (){
       .then(data => setReviews(data.results)); 
   }, [movieId]);
 
-//   console.log(movieId)
+  console.log(reviews)
     return(
         <div className={s.container}>
         {reviews && reviews.map(content => (
