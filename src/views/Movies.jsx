@@ -49,7 +49,7 @@ export default function Movies() {
             <li key={item.id} className={s.item}>
               <NavLink to={`${item.id}`} className={s.film}>
                 {/* {item.original_title ?? item.title} */}
-                <img className={s.img} src={`https://image.tmdb.org/t/p/w500${item.backdrop_path || '/2f2denPrX62TjWJKVD9i2dum164.jpg'} `}/>
+                <img className={s.img} src={`https://image.tmdb.org/t/p/w500${item.backdrop_path || '/2f2denPrX62TjWJKVD9i2dum164.jpg'} `} alt="alt"/>
                 <p>{item.original_title ?? item.title ?? item.original_name}</p>
               </NavLink>
               

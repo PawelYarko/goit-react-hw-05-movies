@@ -27,7 +27,7 @@ export default function Home() {
                 pathname: `movies/${film.id}`,
                 state:{ from:location }
               }} className={s.popFilm} >
-                <img className={s.img} src={`https://image.tmdb.org/t/p/w500${film.backdrop_path}`}/>
+                <img className={s.img} src={`https://image.tmdb.org/t/p/w500${film.backdrop_path}`} alt="alt"/>
                 <p>{film.original_title ?? film.title ?? film.original_name}</p>
               </NavLink>
             </li>
