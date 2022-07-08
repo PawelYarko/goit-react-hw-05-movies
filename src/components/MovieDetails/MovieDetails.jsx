@@ -23,7 +23,7 @@ const MovieDetails = () =>{
         <>
           <div className={s.container}>
             <img
-              src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
+              src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path  || '/2f2denPrX62TjWJKVD9i2dum164.jpg'}`}
               className={s.img}
             />
             <div className={s.descr}>

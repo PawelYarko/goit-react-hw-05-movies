@@ -3,33 +3,26 @@ import { NavLink, useSearchParams } from "react-router-dom";
 import s from './css/Movies.module.css'
 
 export default function Movies() {
-  // const [filmsNames, setFilmsNames] = useState([]);
-  // const [inputValue, setInputValue] = useState(null);
   const [searchRequest, setSearchRequest] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const query = searchParams.get('query');
-  console.log(query)
+  const query = searchParams.get('query') || '';
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=38f8f0caa293ab4deac25df0604d8478&language=en-US&page=1&include_adult=false&query=${searchParams}`
+      `https://api.themoviedb.org/3/search/movie?api_key=38f8f0caa293ab4deac25df0604d8478&language=en-US&page=1&include_adult=false&query=${query}`
     )
       .then(response => {
         return response.json();
       })
-      .then(data => setSearchRequest(data.results));
-  }, [searchParams]);
-
-  const handleInputFormChange = e => {
-    const value = e.currentTarget.value.toLowerCase();
-    setSearchParams({query: value});
-  };
+      .then(data => setSearchRequest(data.results));   
+  }, [query]);
 
   const handleFormSubmit = e => {
     e.preventDefault();
+    const value = e.target.search.value;
 
-    if (searchParams.trim() === '') {
+    if (value.trim() === '') {
       return;
     }
     setSearchParams({query: value});
@@ -39,7 +32,7 @@ export default function Movies() {
     <>
       <form onSubmit={handleFormSubmit}>
         <input
-          onChange={handleInputFormChange}
+          name="search"
           type="text"
           autoComplete="off"
           className={s.input}
@@ -50,12 +43,14 @@ export default function Movies() {
           Search
         </button>
       </form>
-      <ul>
+      <ul className={s.filmsList}>
         {searchRequest &&
           searchRequest.map(item => (
-            <li key={item.id}>
-              <NavLink to="/">
-                {item.original_title ?? item.title}
+            <li key={item.id} className={s.item}>
+              <NavLink to={`${item.id}`} className={s.film}>
+                {/* {item.original_title ?? item.title} */}
+                <img className={s.img} src={`https://image.tmdb.org/t/p/w500${item.backdrop_path || '/2f2denPrX62TjWJKVD9i2dum164.jpg'} `}/>
+                <p>{item.original_title ?? item.title ?? item.original_name}</p>
               </NavLink>
               
               </li>
