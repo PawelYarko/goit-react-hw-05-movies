@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
-import { useParams, NavLink, Outlet } from 'react-router-dom';
+import { useParams, NavLink, Outlet, useLocation } from 'react-router-dom';
+import GoBackButton from '../GoBackButton/GoBackButton'
 import s from './MovieDetails.module.css';
 
 const MovieDetails = () =>{
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
-
+  
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? "/movies";
   
   useEffect(() => {
     fetch(
@@ -19,22 +22,24 @@ const MovieDetails = () =>{
 
   return (
     <>
+    <GoBackButton to={backLinkHref}/>
       {movie && (
         <>
           <div className={s.container}>
             <img
               src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path  || '/2f2denPrX62TjWJKVD9i2dum164.jpg'}`}
+              alt="alt"
               className={s.img}
             />
             <div className={s.descr}>
               <h2>
                 {movie.original_title} {movie.release_date.slice(0, 4)}
               </h2>
-              <p>User Score: {movie.vote_average}</p>
+              <p>User Score: {Number(movie.vote_average) * 10}%</p>
               <h2>Overview</h2>
               <p>{movie.overview}</p>
               <h2>Genres</h2>
-              {/* <p>{movie.genres}</p> */}
+              {movie.genres.map(({name})=> <span>{name} </span>)}
             </div>
           </div>
           <div className={s.additional}>
