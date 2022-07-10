@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
+import axios from 'axios';
 import s from './css/Home.module.css'
 
 export default function Home() {
@@ -7,14 +8,19 @@ export default function Home() {
 
   const location = useLocation();
 
+
   useEffect(() => {
-    fetch(
-      'https://api.themoviedb.org/3/trending/all/day?api_key=38f8f0caa293ab4deac25df0604d8478'
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(data => setPopFilms(data.results));
+    async function get() {
+      try {
+        const response = await axios.get(
+          'https://api.themoviedb.org/3/trending/all/day?api_key=38f8f0caa293ab4deac25df0604d8478'
+        );
+        setPopFilms(response.data.results);
+      } catch (error) {
+        console.log('error');
+      }
+    }
+    get();
   }, []);
   
   return (

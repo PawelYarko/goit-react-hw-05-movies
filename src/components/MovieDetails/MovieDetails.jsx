@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, NavLink, Outlet, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import GoBackButton from '../GoBackButton/GoBackButton'
 import s from './MovieDetails.module.css';
 
@@ -9,15 +10,20 @@ const MovieDetails = () =>{
   
   const location = useLocation();
   const backLinkHref = location.state?.from ?? "/movies";
-  
+
+
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=38f8f0caa293ab4deac25df0604d8478&language=en-US`
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(data => setMovie(data));
+    async function get() {
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/movie/${movieId}?api_key=38f8f0caa293ab4deac25df0604d8478&language=en-US`
+        );
+        setMovie(response.data);
+      } catch (error) {
+        console.log('error');
+      }
+    }
+    get();
   }, [movieId]);
 
   return (
@@ -39,7 +45,7 @@ const MovieDetails = () =>{
               <h2>Overview</h2>
               <p>{movie.overview}</p>
               <h2>Genres</h2>
-              {movie.genres.map(({name})=> <span>{name} </span>)}
+              {movie.genres.map(({name, id})=> <span key={id}>{name} </span>)}
             </div>
           </div>
           <div className={s.additional}>
