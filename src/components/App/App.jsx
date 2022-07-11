@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 
 
-const AppBar = lazy(() => import("../AppBar/AppBar"));
+const Layout = lazy(() => import("../Layout/Layout"));
   const Home = lazy(() => import("../../views/Home"));
   const Movies = lazy(() => import("../../views/Movies"));
   const MovieDetails = lazy(() => import("../MovieDetails/MovieDetails"));
@@ -15,20 +15,17 @@ const App = () => {
   
   return (
     <>
-      <AppBar />
-        <Suspense fallback={<div>Loading...</div>}>
       <Routes>
-        <Route path="/" index element={<Home />} /> 
-         <Route path="/movies" element={<Movies />}/>
-
-          <Route path="/movies/:movieId" element={<MovieDetails />}>
+        <Route path="/" element={<Layout />} > 
+        <Route index element={<Home />} />
+         <Route path="movies" element={<Movies />}/>
+          <Route path="movies/:movieId" element={<MovieDetails />}>
             <Route path="cast" element={<Cast />} /> 
             <Route path="reviews" element={<Reviews />} />
           </Route>
-
-        <Route path="*" element={<NotFound />} /> 
+          <Route path="*" element={<NotFound />} /> 
+          </Route>
       </Routes>
-      </Suspense>
     </>
   );
 }
