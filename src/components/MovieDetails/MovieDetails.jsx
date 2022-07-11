@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
-import { useParams, NavLink, Outlet, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import { useState, useEffect } from 'react'
+import { useParams, NavLink, Outlet, useLocation } from 'react-router-dom'
+import axios from 'axios'
 import GoBackButton from '../GoBackButton/GoBackButton'
-import s from './MovieDetails.module.css';
+import s from './MovieDetails.module.css'
 
 const MovieDetails = () =>{
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? "/movies";
 
+  const backLinkHref = location.state?.from ?? "/";
 
   useEffect(() => {
     async function get() {
@@ -52,12 +52,12 @@ const MovieDetails = () =>{
             <h2 className={s.title}>Additional information</h2>
             <ul className={s.list}>
               <li className={s.item}>
-                <NavLink to="cast" className={s.nav}>
+                <NavLink to="cast" state={{ from: location }} className={s.nav}>
                   Cast
                 </NavLink>
               </li>
               <li className={s.item}>
-                <NavLink to="reviews" className={s.nav}>
+                <NavLink to="reviews" state={{ from: location }} className={s.nav}>
                   Reviews
                 </NavLink>
               </li>

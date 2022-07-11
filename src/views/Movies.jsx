@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
-import { NavLink, useSearchParams } from 'react-router-dom';
+import { NavLink, useSearchParams, useLocation} from 'react-router-dom';
 import axios from 'axios';
+// import GoBackButton from '../components/GoBackButton/GoBackButton'
 import s from './css/Movies.module.css';
 
 export default function Movies() {
   const [searchRequest, setSearchRequest] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const query = searchParams.get('query') || '';
+  const query = searchParams.get('query') ?? '';
+  const location = useLocation();
 
   useEffect(() => {
     async function get() {
@@ -52,7 +54,7 @@ export default function Movies() {
         {searchRequest &&
           searchRequest.map(item => (
             <li key={item.id} className={s.item}>
-              <NavLink to={`${item.id}`} className={s.film}>
+              <NavLink to={`${item.id}`} state={{ from: location }} className={s.film}>
                 <img
                   className={s.img}
                   src={`https://image.tmdb.org/t/p/w500${
