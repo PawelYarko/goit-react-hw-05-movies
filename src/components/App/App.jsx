@@ -18,7 +18,7 @@ const App = () => {
       <AppBar />
         <Suspense fallback={<div>Loading...</div>}>
       <Routes>
-        <Route path="/" exact element={<Home />} /> 
+        <Route path="/" index element={<Home />} /> 
          <Route path="/movies" element={<Movies />}/>
 
           <Route path="/movies/:movieId" element={<MovieDetails />}>
