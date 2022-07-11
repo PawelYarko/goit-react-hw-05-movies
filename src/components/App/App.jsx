@@ -2,14 +2,15 @@ import { Routes, Route } from 'react-router-dom';
 import { lazy } from 'react';
 import { Layout } from '../Layout/Layout';
 
-
+// const Layout = lazy(() => import('../Layout/Layout'));
 const Home = lazy(() => import('../../views/Home'));
 const Movies = lazy(() => import('../../views/Movies'));
 const MovieDetails = lazy(() => import('../MovieDetails/MovieDetails'));
 const Cast = lazy(() => import('../Cast/Cast'));
 const Reviews = lazy(() => import('../Reviews/Reviews'));
+// const NotFound = lazy(() => import('../../views/NotFound'));
 
-const App = () => {
+export const App = () => {
   return (
     <>
       <Routes>
@@ -20,10 +21,10 @@ const App = () => {
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />
           </Route>
+          {/* <Route path="*" element={<NotFound />} /> */}
         </Route>
       </Routes>
     </>
   );
 };
 
-export { App };
