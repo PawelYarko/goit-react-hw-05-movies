@@ -52,7 +52,7 @@ const MovieDetails = () =>{
             <h2 className={s.title}>Additional information</h2>
             <ul className={s.list}>
               <li className={s.item}>
-                <NavLink to="cast" state={{ from: location }} className={s.nav}>
+                <NavLink to="cast" state={{ from: location  }} className={s.nav}>
                   Cast
                 </NavLink>
               </li>

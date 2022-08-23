@@ -1,4 +1,6 @@
 import axios from 'axios';
+
+
 const axiosAPI = axios.create({
   baseURL:'https://api.themoviedb.org/trending/all/day?api_key=',
   method:'get',
